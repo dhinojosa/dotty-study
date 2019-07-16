@@ -1,26 +1,18 @@
 package com.evolutionnext.uniontypes
 
-case class Assigned(username:String)
+import java.time.LocalDateTime
 
-case object WontFix
+case class LoginSuccess(time:LocalDateTime)
+case class LoginFailure(message:String)
 
-case object Fixed
+//Notice: We don't need to add any subclasses
+type LoginStatus = LoginSuccess | LoginFailure
 
-case object Unassigned
+object UnionTypes extends App {
+   def login(s:String):LoginStatus = 
+     if (s.isEmpty) LoginFailure("That's no name")
+     else LoginSuccess(LocalDateTime.now)
 
-type BugTrackingStatus = Assigned | WontFix.type | Fixed.type | Unassigned.type
-
-object UnionTypes {
-  def logStatus(x:BugTrackingStatus):String = 
-      x match {
-          case Assigned(x) => s"Assigned to $x"
-          case WontFix  => "Won't Fix"
-          case Fixed => "Fixed"
-          case Unassigned => "Unassigned"
-      }
-
-  println(logStatus(Assigned("Daniel")))
-  println(logStatus(WontFix) )
-  println(logStatus(Fixed))
-  println(logStatus(Unassigned))
+   println(login("Alex Morgan"))
+   println(login(""))
 }

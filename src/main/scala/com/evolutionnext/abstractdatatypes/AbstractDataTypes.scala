@@ -26,19 +26,15 @@ enum Tree[+T] {
  **/
 
  object AbstractDataTypes extends App {
-  val tree = 
-     Tree.Branch(left =  
-                   Tree.Branch(left = 
-                                 Tree.Leaf(40), 
-                               right = 
-                                 Tree.Branch(Tree.Leaf(20), 
-                                             Tree.Leaf(100))) 
-                 , right =
-                     Tree.Branch(left =
-                                   Tree.Leaf(20), 
-                                 right = 
-                                   Tree.Leaf(60))
-                )
+   import Tree._
+   val tree = 
+     Branch(left =  
+       Branch(left = Tree.Leaf(40), 
+              right = Branch(
+                         left = Leaf(20), 
+                                Leaf(100))) 
+              , right = Branch(left = Leaf(20), 
+                               right = Leaf(60))
+            )
   println(tree)
 }
-

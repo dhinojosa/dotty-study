@@ -2,9 +2,9 @@ package com.evolutionnext.creatorapplications
 
 object CreatorApplications extends App {
   /* Use a simple function to create an object
-  *  without a new. Although this is already in 
-  *  place now with apply, this allows us to do so even
-  *  if there is no such apply call
+   *  without a new. Although this is already in 
+   *  place now with apply, this allows us to do so even
+   *  if there is no such apply call
   **/
 
   enum FoodGroup {

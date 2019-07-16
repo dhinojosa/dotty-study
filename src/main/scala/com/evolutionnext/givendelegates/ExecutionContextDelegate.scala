@@ -5,10 +5,11 @@ object ExecutionContextDelegate extends App {
   import java.util.concurrent.Executors
   delegate ec for ExecutionContext = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(12))
 
-  val future = Future.apply {
+  val future = Future {
     println(s"Thread-name: ${Thread.currentThread().getName}")
     Thread.sleep(3000)
     50 + 100
   }
+
   future.foreach(println)
 }
