@@ -4,7 +4,8 @@ version := "1.0-SNAPSHOT"
 
 description := "Study and Presentation Material for Scala Dotty"
 
-scalaVersion := "0.16.0-RC3"
+scalaVersion := "0.27.0-RC1"
 
 fork := true
 
+resolvers ++= Seq("typesafe-releases" at "https://repo.typesafe.com/typesafe/releases")
