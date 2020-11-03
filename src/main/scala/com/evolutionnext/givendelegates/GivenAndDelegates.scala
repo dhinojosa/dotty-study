@@ -8,12 +8,12 @@ object MyPredef {
     def (x: T) > (y: T) = compare(x, y) > 0
   }
 
-  delegate IntOrd for MyOrd[Int] {
+  given IntOrd as MyOrd[Int] {
     def compare(x: Int, y: Int) =
       if (x < y) -1 else if (x > y) +1 else 0
    }
 
-  delegate ListOrd[T] for MyOrd[List[T]] given (ord: MyOrd[T]) {
+  given ListOrd[T] (using ord:MyOrd[T]) as MyOrd[List[T]] {
     def compare(xs: List[T], ys: List[T]): Int = (xs, ys) match {
       case (Nil, Nil) => 0
       case (Nil, _) => -1
@@ -27,7 +27,8 @@ object MyPredef {
 
 object GivenAndDelegates extends App {
   import MyPredef._
-  def min[A](x:A, y:A) given (ord:MyOrd[A]) = {
+
+  def min[A](x:A, y:A)(using ord:MyOrd[A]) = {
      if (ord.compare(x, y) < 0) x else y
   }
 
@@ -35,7 +36,7 @@ object GivenAndDelegates extends App {
   println(min(12, 10))
 
   //Looking up the instance using `the`
-  val listSorter = the[ListOrd[Int]] 
+  val listSorter = summon[ListOrd[Int]] 
   println(listSorter.compare(List(1,2,3,4), List(2,3,4,5)))
   println(listSorter.compare(List(10,20,30,40), List(2,3,4,5)))
 }

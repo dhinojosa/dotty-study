@@ -10,17 +10,19 @@ package com.evolutionnext.traitparameters
 * Traits offer I am "adding in a feature"
 **/
 
+trait ReallyReallyGoodLooking(handsomeLevel:Int)
+
 trait LogStack(depth:Int) {
   import scala.collection.mutable.Queue
   private val queue = Queue.empty[String]
   def add(s:String) = {
     queue.enqueue(s)
-    if (queue.size > 5) queue.dequeue
+    if (queue.size > depth) queue.dequeue
   }
   def elements = queue.toList
 }
 
-case class Account(accountNumber: String, balance:Long) extends LogStack(10) {
+case class Account(accountNumber: String, balance:Long) extends LogStack(5) with ReallyReallyGoodLooking(10){
   def deposit(amount:Long) = {
     add(s"Depositing $amount")
   }

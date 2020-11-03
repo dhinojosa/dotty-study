@@ -1,6 +1,6 @@
 package com.evolutionnext.parameteruntupling
 
-object ParameterUntupling extends App{
+object ParameterUntupling extends App:
    /* Before */
    val tupleList = List(1 -> "One", 2 -> "Two",
                         3 -> "Three", 4 -> "Three",
@@ -13,10 +13,10 @@ object ParameterUntupling extends App{
    println(tupleList.map{case (x, y) => (x, y + " Hundred")})
 
    /* New to Dotty */
- 
+
    println(tupleList.map{(x,y) => (x, y + " Hundred")})
 
    /* Also acceptable */
 
    println(tupleList.map((x,y) => (x, y + " Hundred")))
-}
+

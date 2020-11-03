@@ -10,5 +10,5 @@ object MatchTypes extends App {
   val m:Elem[String] = 'x'
   val n:Elem[Array[String]] = "Hello"
   println(m)
-  println(n)
+  println(n.getClass.getSimpleName)
 }

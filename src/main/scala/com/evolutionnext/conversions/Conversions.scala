@@ -1,21 +1,29 @@
 package com.evolutionnext.conversions
 
-case class Fahrenheit(value:Int)
-case class Celcius(value:Int)
+case class Fahrenheit(value:Int):
+  override def toString = s"$value°F"
 
-object Conversions extends App {
+case class Celcius(value:Int):
+  override def toString = s"$value°C"
+
+object Conversions extends App:
 
   import scala.language.implicitConversions
 
-  delegate fahrenheitToCelcius for Conversion[Fahrenheit,Celcius] = new Conversion[Fahrenheit, Celcius] {
-    def apply(f:Fahrenheit) = Celcius(((f.value.toDouble - 32) * (5.0/9.0)).round.toInt)
-  }
+  given fahrenheitToCelcius as Conversion[Fahrenheit,Celcius]:
+    def apply(f:Fahrenheit) = 
+      Celcius(((f.value.toDouble - 32) * (5.0/9.0)).round.toInt)
 
-  delegate celciusToFahrenheit for Conversion[Celcius,Fahrenheit] = new Conversion[Celcius, Fahrenheit] {
-    def apply(c:Celcius) = Fahrenheit(((c.value.toDouble * (9.0/5.0)) + 32).round.toInt)
-  }
+  given celciusToFahrenheit as Conversion[Celcius,Fahrenheit]:
+    def apply(c:Celcius) = 
+      Fahrenheit(((c.value.toDouble * (9.0/5.0)) + 32).round.toInt)
 
-  println(Celcius(0):Fahrenheit)
-  println(Celcius(100):Fahrenheit)
-  println(Fahrenheit(100):Celcius)
-}
+  def diffFromFreezing(c:Celcius):Celcius = 
+    println("processing:" + c)
+    val result = if (c.value < 0) Celcius(0) else c
+    println("result:" + result)
+    result
+
+  printf("0°C in Fahrenheit is %s\n", Celcius(0):Fahrenheit)
+  printf("100°C in Fahrenheit is %s\n", Celcius(100):Fahrenheit)
+  printf("100°F in Celcius is %s\n", Fahrenheit(100):Celcius)

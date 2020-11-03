@@ -25,7 +25,7 @@ enum Tree[+T] {
  * }
  **/
 
- object AbstractDataTypes extends App {
+object AbstractDataTypes extends App:
    import Tree._
    val tree = 
      Branch(left =  
@@ -36,5 +36,4 @@ enum Tree[+T] {
               , right = Branch(left = Leaf(20), 
                                right = Leaf(60))
             )
-  println(tree)
-}
+   println(tree)

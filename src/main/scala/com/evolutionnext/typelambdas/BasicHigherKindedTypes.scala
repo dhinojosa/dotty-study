@@ -1,6 +1,7 @@
 package com.evolutionnext.typelambdas;
 
 object BasicHigherKindedTypes extends App {
+
   def acceptHigherKindedTypes[M[_],A](x:M[A]) = x
 
   println(acceptHigherKindedTypes(Some(123)))

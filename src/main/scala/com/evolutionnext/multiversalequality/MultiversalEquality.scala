@@ -18,7 +18,7 @@ object MultiversalEquality extends App {
 
     //They are comparable if they are the same type, if they are not, 
     //then you would need to declare
-    delegate for Eql[Int, String] = Eql.derived
+    given Eql[Int, String] = Eql.derived
     println(3 == "3") //false
 
     // By default, all numbers are comparable, because of;
@@ -39,8 +39,8 @@ object MultiversalEquality extends App {
     // scala.language.strictEquality is enabled, therefore we 
     // need some extra delegate instances
     // to compare instances of A and B.
-    delegate for Eql[A, B] = Eql.derived
-    delegate for Eql[B, A] = Eql.derived
+    given Eql[A, B] = Eql.derived
+    given Eql[B, A] = Eql.derived
 
     println(a != b)
     println(b == a)

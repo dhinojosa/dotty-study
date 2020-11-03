@@ -8,11 +8,17 @@ case class LoginFailure(message:String)
 //Notice: We don't need to add any subclasses
 type LoginStatus = LoginSuccess | LoginFailure
 
-object UnionTypes extends App {
-   def login(s:String):LoginStatus = 
-     if (s.isEmpty) LoginFailure("That's no name")
-     else LoginSuccess(LocalDateTime.now)
+object UnionTypes extends App:
+  def matchItUp(x:LoginStatus) = 
+    x match
+    case LoginFailure(b) => s"Failed with $b"
+    case LoginSuccess(t) => s"Successful"
 
-   println(login("Alex Morgan"))
-   println(login(""))
-}
+  def login(s:String):LoginStatus = 
+    if (s.isEmpty) LoginFailure("That's no name")
+    else LoginSuccess(LocalDateTime.now)
+
+  println(login("Alex Morgan"))
+  println(login(""))
+  println(matchItUp(login("Megan Rapinoe")))
+
